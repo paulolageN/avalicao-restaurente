@@ -5,83 +5,164 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main"
+    android:background="#FF9800"
+    android:gravity="right"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".DetalhesDoUsuarioActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="204dp"
-        android:layout_height="130dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="50dp"
-        app:srcCompat="@drawable/user" />
-
-    <EditText
-        android:id="@+id/editEmailLogin"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#050505"
-        android:ems="10"
-        android:hint="E-mail"
-        android:inputType="textEmailAddress"
-        android:textSize="20sp" />
+        android:layout_weight="0.1"
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/editSenhaLogin"
+        <ImageView
+            android:id="@+id/imgVoltar"
+            android:layout_width="61dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="300dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/arrow_back_36dp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Senha"
-        android:inputType="text|textPassword"
-        android:textSize="20sp" />
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_weight="0.1"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginLeft="110dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="110dp"
-        android:background="@drawable/rounded_orange_button"
-        android:backgroundTint="#FF5722"
-        android:text="Entrar" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="AvaliaFood"
+            android:textColor="#373434"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    <Switch
-        android:id="@+id/switchLogado"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="80dp"
-        android:text="Permacer logado"
-        android:textAlignment="center"
-        android:textColor="#FF9800"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cadastro de usuário"
+            android:textSize="18sp" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Nao possui uma conta ?"
-        android:textAlignment="center"
-        android:textColor="#FF9800"
-        android:textSize="20sp" />
+        android:layout_weight="4"
+        android:background="@drawable/background_rounded_left"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnCriarConta"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginLeft="110dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="110dp"
-        android:background="@drawable/rounded_orange_button"
-        android:backgroundTint="#FF5722"
-        android:text="CRIAR CONTA" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_weight="0.1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginTop="20dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="81dp"
+                        android:layout_height="71dp"
+                        app:srcCompat="@drawable/rounded_orange_button" />
+
+                    <ImageView
+                        android:id="@+id/fotoPerfil"
+                        android:layout_width="82dp"
+                        android:layout_height="71dp"
+                        app:srcCompat="@drawable/user" />
+
+                </androidx.cardview.widget.CardView>
+
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editEmailLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="E-mail"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/editSenhaLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="Senha"
+                android:inputType="text|textPassword" />
+
+            <Switch
+                android:id="@+id/switchLogado"
+                android:layout_width="220dp"
+                android:layout_height="44dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginRight="100dp"
+                android:gravity="center"
+                android:text="Manter Logado"
+                android:textColor="#000000"
+                android:textSize="16dp"
+                android:thumbTint="#FF9800"
+                android:trackTint="#FF5722" />
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="100dp"
+                android:background="@drawable/rounded_red_button"
+                android:backgroundTint="#FF0202"
+                android:text=" Login" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="100dp"
+                android:gravity="center"
+                android:text="nao possui conta ?"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btnCriarConta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="100dp"
+                android:background="@drawable/rounded_red_button"
+                android:backgroundTint="#FF0202"
+                android:text=" Criar conta" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

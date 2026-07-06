@@ -32,15 +32,15 @@ public class CadastroDeUsuarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 usuario = new Usuario();
-                usuario.setNomeUsuario(binding.editNome.getText().toString());
-                usuario.setEmailUsuario(binding.editEmail.getText().toString());
-                usuario.setSenhaUsuario(binding.editSenha.getText().toString());
+                usuario.setNomeUsuario(binding.editNomeCadastro.getText().toString());
+                usuario.setEmailUsuario(binding.editEmailCadastro.getText().toString());
+                usuario.setSenhaUsuario(binding.editSenhaCadastro.getText().toString());
                 usuario.setFotoUsuario("user.png");
 
                 if(usuarioController.inserir(usuario)){
                     Toast.makeText(CadastroDeUsuarioActivity.this,"Seu cadastro foi realizado com sucesso!", Toast.LENGTH_LONG).show();
                     //Chamar a proxima tela principal
-                    Intent intent = new Intent(CadastroDeUsuarioActivity.this, MainActivity.class);
+                    Intent intent = new Intent(CadastroDeUsuarioActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }else{
