@@ -29,6 +29,11 @@ public class BDHelper extends SQLiteOpenHelper {
                     "enderecoRestaurante TEXT NOT NULL, telefoneRestaurante TEXT NOT NULL," +
                     "descricaoRestaurante TEXT, horarioFuncionamento TEXT NOT NULL)");
 
+            db.execSQL("CREATE TABLE avaliacaoRestaurante(idAvaliacao INTEGER PRIMARY KEY " +
+                    "AUTOINCREMENT, idRestaurante INTEGER NOT NULL," +
+                    "idUsuario INTEGER NOT NULL, pontosAvaliacao FLOAT NOT NULL," +
+                    "textoAvaliacao TEXT)");
+
         }catch (Exception e){
             // apresenta o erro no logcat
             e.printStackTrace();
