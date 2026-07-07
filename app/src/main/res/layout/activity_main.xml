@@ -32,11 +32,15 @@
             android:layout_height="match_parent"
             android:text="listar restaurantes" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
         <Button
             android:id="@+id/botao"
             android:layout_width="170dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
             android:text="editar perfil" />
     </LinearLayout>
 
