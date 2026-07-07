@@ -10,19 +10,16 @@ import android.widget.ArrayAdapter;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.myapplication.AvaliarRestauranteActivity;
-import com.example.myapplication.DetalhesDoRestauranteActivity;
 import com.example.myapplication.databinding.ItemAvaliacaoBinding;
-import com.example.myapplication.databinding.ItemRestauranteBinding;
 
 import java.util.ArrayList;
 
 import model.Avaliacao;
-import model.Restaurante;
 
-public class AvalaicaoAdaptrer extends ArrayAdapter<Avaliacao> {
 
-    public AvalaicaoAdaptrer(Context context, ArrayList<Avaliacao> avaliacoes) {
+public class AvaliacaoAdapter extends ArrayAdapter<Avaliacao> {
+
+    public AvaliacaoAdapter(Context context, ArrayList<Avaliacao> avaliacoes) {
         super(context, 0, avaliacoes);
     }
 
@@ -30,7 +27,7 @@ public class AvalaicaoAdaptrer extends ArrayAdapter<Avaliacao> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        AvalaicaoAdaptrer avaliacao = getItem(position);
+        Avaliacao avaliacao = getItem(position);
 
         ItemAvaliacaoBinding binding;
 
@@ -42,8 +39,9 @@ public class AvalaicaoAdaptrer extends ArrayAdapter<Avaliacao> {
             binding = (ItemAvaliacaoBinding) convertView.getTag();
         }
 
-        binding.txtUser.setText(avaliacao.);
-        binding.txtAvaliacaoDoUser.setText(avaliacao.());
+        binding.txtUser.setText(avaliacao.getUsuario().getNomeUsuario());
+        binding.txtAvaliacaoDoUser.setText(avaliacao.getTextoAvaliacao());
+        binding.ratingBar3.setRating(avaliacao.getPontosAvaliacao());
 
 
         return convertView;

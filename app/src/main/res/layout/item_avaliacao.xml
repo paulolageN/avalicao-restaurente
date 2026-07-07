@@ -15,32 +15,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User"
-            android:textColor="#000000"
+            android:textColor="#373434"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtAvaliacaoDoUser"
-            android:layout_width="match_parent"
-            android:layout_height="95dp"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/txtViewAvaliacao2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="⭐ Avaliações"
-            android:textColor="#FFC107"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="16sp" />
 
         <RatingBar
             android:id="@+id/ratingBar3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:foregroundGravity="center"
             android:progressTint="#FFEB3B" />
     </LinearLayout>

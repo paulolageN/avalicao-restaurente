@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -25,12 +26,15 @@ public class AvaliarRestauranteActivity extends AppCompatActivity {
     AvaliacaoController avaliacaoController;
     Restaurante restaurante;
     Avaliacao avaliacao;
+    Usuario usuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityAvaliarRestauranteBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
+        avaliacaoController = new AvaliacaoController(AvaliarRestauranteActivity.this);
         restauranteController = new RestauranteController(AvaliarRestauranteActivity.this);
         restaurante = (Restaurante) getIntent().getSerializableExtra("restaurante");
         binding.nomeRestauranteAvaliacao.setText(restaurante.getNomeRestaurante());
@@ -46,6 +50,11 @@ public class AvaliarRestauranteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 avaliacao = new Avaliacao();
+                avaliacao.setRestaurante(restaurante);
+                SharedPreferences preferences = getSharedPreferences("usuario", MODE_PRIVATE);
+                Usuario usuario = new Usuario();
+                usuario.setIdUsuario(preferences.getInt("id", -1));
+                avaliacao.setUsuario(usuario);
                 avaliacao.setTextoAvaliacao(binding.editAvalicaoRestaurante.getText().toString());
                 avaliacao.setPontosAvaliacao(binding.ratingBar.getNumStars());
 

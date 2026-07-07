@@ -14,7 +14,8 @@ import com.example.myapplication.databinding.ActivityDetalhesDoRestauranteBindin
 
 import java.util.ArrayList;
 
-import adapter.AvalaicaoAdaptrer;
+import adapter.AvaliacaoAdapter;
+import adapter.AvaliacaoAdapter;
 import adapter.RestauranteAdapter;
 import controller.AvaliacaoController;
 import controller.RestauranteController;
@@ -34,16 +35,16 @@ public class DetalhesDoRestauranteActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         controller = new AvaliacaoController(this);
+        restaurante = (Restaurante) getIntent().getSerializableExtra("restaurante");
         avaliacoes = controller.listarAvaliacoes(restaurante);
 
-        restaurante = (Restaurante) getIntent().getSerializableExtra("restaurante");
-        binding.txtNomeRestaurante.setText("Restaurante"+restaurante.getNomeRestaurante());
-        binding.txtEnderecoRestaurante.setText("Endereco"+restaurante.getEnderecoRestaurante());
-        binding.txtTelefone.setText("Telefone"+restaurante.getTelefoneRestaurante());
-        binding.txtDescricaoRestaurante.setText("Descricao"+restaurante.getDescricaoRestaurnate());
-        binding.txtHorarioRestaurante.setText("Horario de funcionamento"+restaurante.getHorarioFuncionamento());
+        binding.txtNomeRestaurante.setText("Nome: "+restaurante.getNomeRestaurante());
+        binding.txtEnderecoRestaurante.setText("Endereco: "+restaurante.getEnderecoRestaurante());
+        binding.txtTelefone.setText("Telefone: "+restaurante.getTelefoneRestaurante());
+        binding.txtDescricaoRestaurante.setText("Descricao: "+restaurante.getDescricaoRestaurnate());
+        binding.txtHorarioRestaurante.setText("Horario de funcionamento: "+restaurante.getHorarioFuncionamento());
 
-        AvalaicaoAdaptrer adapter = new AvalaicaoAdaptrer(this, avaliacoes);
+        AvaliacaoAdapter adapter = new AvaliacaoAdapter(this, avaliacoes);
         binding.Avaliacoes.setAdapter(adapter);
 
         binding.imgVoltar.setOnClickListener(new View.OnClickListener() {

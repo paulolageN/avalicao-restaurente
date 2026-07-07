@@ -42,6 +42,7 @@ public class RestauranteAdapter extends ArrayAdapter<Restaurante> {
 
         binding.txtViewNomeRestaurante.setText(restaurante.getNomeRestaurante());
         binding.txtViewEnderecoRestaurante.setText(restaurante.getEnderecoRestaurante());
+        binding.txtViewHorario.setText(restaurante.getHorarioFuncionamento());
         binding.idRestaurante.setText(Integer.toString(restaurante.getIdRestaurante()));
 
         binding.btnVerMais.setOnClickListener(new View.OnClickListener() {

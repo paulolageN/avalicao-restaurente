@@ -30,11 +30,13 @@ public class AvaliacaoDAO {
             database = dbHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
             // nome do campo da tabela, valor
+            values.put("idRestaurante", avaliacao.getRestaurante().getIdRestaurante());
+            values.put("idUsuario", avaliacao.getUsuario().getIdUsuario());
             values.put("pontosAvaliacao",avaliacao.getPontosAvaliacao());
             values.put("textoAvaliacao",avaliacao.getTextoAvaliacao());
 
 
-            long result = database.insert("avaliacao", null,values);
+            long result = database.insert("avaliacaoRestaurante", null,values);
 
             // fechar a conexao com o banco de dados
             database.close();
@@ -62,8 +64,10 @@ public class AvaliacaoDAO {
             // nome do campo da tabel, valor
             values.put("pontosAvaliacao",avaliacao.getPontosAvaliacao());
             values.put("textoAvaliacao",avaliacao.getTextoAvaliacao());
+            values.put("idRestaurante", avaliacao.getRestaurante().getIdRestaurante());
+            values.put("idUsuario", avaliacao.getUsuario().getIdUsuario());
 
-            long result = database.update("avaliacao", values, "idAvaliacao = ?", new String[]{String.valueOf(avaliacao.getIdAvaliacao())});
+            long result = database.update("avaliacaoRestaurante", values, "idAvaliacao = ?", new String[]{String.valueOf(avaliacao.getIdAvaliacao())});
 
             // fechar a conexao com o banco de dados
             database.close();
@@ -77,7 +81,7 @@ public class AvaliacaoDAO {
                 return true;
             }
         } catch (Exception e){
-            Log.e("RestauranteDAO", "erro ao alterar os dados da avaliacao"+e.getMessage());
+            Log.e("AvaliacaoDAO", "erro ao alterar os dados da avaliacao"+e.getMessage());
             return false;
         }
     }
@@ -88,7 +92,7 @@ public class AvaliacaoDAO {
             // abrir banco de dados para deletar restaurante
             database = dbHelper.getWritableDatabase();
             // deleta um restaurante
-            long result = database.delete("avaliacao", "idAvaliacao = ?", new String[]{String.valueOf(avaliacao.getIdAvaliacao())});
+            long result = database.delete("avaliacaoRestaurante", "idAvaliacao = ?", new String[]{String.valueOf(avaliacao.getIdAvaliacao())});
 
             // fechar a conexao com o banco de dados
             database.close();
@@ -108,14 +112,19 @@ public class AvaliacaoDAO {
     }
 
     // listar todos as avaliacoes
-    public ArrayList<Avaliacao> listarAvaliacoes(Avaliacao avaliacao){
+    public ArrayList<Avaliacao> listarAvaliacoes(Restaurante restaurante){
         ArrayList<Avaliacao> avaliacoes = new ArrayList<>();
 
         try {
             // abrir banco de dados para leitura
             database = dbHelper.getReadableDatabase();
-            Cursor cursor = database.rawQuery("SELECT * FROM avaliacao INNER JOIN restaurante ON avaliacao.idRestaurante = restaurante.idRestaurante WHERE idRestaurante = ? ", new String[]{String.valueOf(restaurante.getIdRestaurante())});
-
+            Cursor cursor = database.rawQuery(
+                    "SELECT * FROM avaliacaoRestaurante " +
+                            "INNER JOIN restaurante ON avaliacaoRestaurante.idRestaurante = restaurante.idRestaurante " +
+                            "INNER JOIN usuario ON avaliacaoRestaurante.idUsuario = usuario.idUsuario " +
+                            "WHERE avaliacaoRestaurante.idRestaurante = ?",
+                    new String[]{String.valueOf(restaurante.getIdRestaurante())}
+            );
 
             if (cursor.moveToFirst()){
                 do {
@@ -127,12 +136,21 @@ public class AvaliacaoDAO {
                     restauranteCusor.setDescricaoRestaurante(cursor.getString(cursor.getColumnIndexOrThrow("descricaoRestaurante")));
                     restauranteCusor.setHorarioFuncionamento(cursor.getString(cursor.getColumnIndexOrThrow("horarioFuncionamento")));
 
-                    Avaliacao avaliacao = new Avaliacao();
-                    avaliacao.setIdAvaliacao(cursor.getInt(cursor.getColumnIndexOrThrow("idAvaliacao")));
-                    avaliacao.setPontosAvaliacao(cursor.getFloat(cursor.getColumnIndexOrThrow("pontosAvaliacao")));
-                    avaliacao.setTextoAvaliacao(cursor.getString(cursor.getColumnIndexOrThrow("textoAvaliacao")));
+                    Usuario usuarioCursor = new Usuario();
+                    usuarioCursor.setIdUsuario(cursor.getInt(cursor.getColumnIndexOrThrow("idUsuario")));
+                    usuarioCursor.setNomeUsuario(cursor.getString(cursor.getColumnIndexOrThrow("nomeUsuario")));
+                    usuarioCursor.setEmailUsuario(cursor.getString(cursor.getColumnIndexOrThrow("emailUsuario")));
+                    usuarioCursor.setSenhaUsuario(cursor.getString(cursor.getColumnIndexOrThrow("senhaUsuario")));
+                    usuarioCursor.setFotoUsuario(cursor.getString(cursor.getColumnIndexOrThrow("fotoUsuario")));
 
-                    avaliacoes.add(avaliacao);
+                    Avaliacao avaliacaoCusor = new Avaliacao();
+                    avaliacaoCusor.setIdAvaliacao(cursor.getInt(cursor.getColumnIndexOrThrow("idAvaliacao")));
+                    avaliacaoCusor.setPontosAvaliacao(cursor.getFloat(cursor.getColumnIndexOrThrow("pontosAvaliacao")));
+                    avaliacaoCusor.setTextoAvaliacao(cursor.getString(cursor.getColumnIndexOrThrow("textoAvaliacao")));
+
+                    avaliacaoCusor.setRestaurante(restauranteCusor);
+                    avaliacaoCusor.setUsuario(usuarioCursor);
+                    avaliacoes.add(avaliacaoCusor);
                 } while (cursor.moveToNext());
             }
 
