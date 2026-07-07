@@ -45,7 +45,7 @@ public class AvaliacaoController {
         return avaliacaoDAO.deletar(avaliacao);
     }
 
-    public ArrayList<Restaurante> listarAvaliacoes(Restaurante restaurante){
+    public ArrayList<Avaliacao> listarAvaliacoes(Restaurante restaurante){
         return avaliacaoDAO.listarAvaliacoes(restaurante);
     }
 

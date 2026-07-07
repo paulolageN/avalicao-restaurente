@@ -12,11 +12,20 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.databinding.ActivityDetalhesDoRestauranteBinding;
 
+import java.util.ArrayList;
+
+import adapter.AvalaicaoAdaptrer;
+import adapter.RestauranteAdapter;
+import controller.AvaliacaoController;
+import controller.RestauranteController;
+import model.Avaliacao;
 import model.Restaurante;
 
 public class DetalhesDoRestauranteActivity extends AppCompatActivity {
 
     ActivityDetalhesDoRestauranteBinding binding;
+    AvaliacaoController controller;
+    ArrayList<Avaliacao> avaliacoes;
     Restaurante restaurante;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +33,18 @@ public class DetalhesDoRestauranteActivity extends AppCompatActivity {
         binding = ActivityDetalhesDoRestauranteBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        controller = new AvaliacaoController(this);
+        avaliacoes = controller.listarAvaliacoes(restaurante);
+
         restaurante = (Restaurante) getIntent().getSerializableExtra("restaurante");
         binding.txtNomeRestaurante.setText("Restaurante"+restaurante.getNomeRestaurante());
         binding.txtEnderecoRestaurante.setText("Endereco"+restaurante.getEnderecoRestaurante());
         binding.txtTelefone.setText("Telefone"+restaurante.getTelefoneRestaurante());
         binding.txtDescricaoRestaurante.setText("Descricao"+restaurante.getDescricaoRestaurnate());
         binding.txtHorarioRestaurante.setText("Horario de funcionamento"+restaurante.getHorarioFuncionamento());
+
+        AvalaicaoAdaptrer adapter = new AvalaicaoAdaptrer(this, avaliacoes);
+        binding.Avaliacoes.setAdapter(adapter);
 
         binding.imgVoltar.setOnClickListener(new View.OnClickListener() {
             @Override

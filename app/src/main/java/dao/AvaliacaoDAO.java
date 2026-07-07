@@ -108,8 +108,8 @@ public class AvaliacaoDAO {
     }
 
     // listar todos as avaliacoes
-    public ArrayList<Restaurante> listarAvaliacoes(Restaurante restaurante){
-        ArrayList<Restaurante> restaurantes = new ArrayList<>();
+    public ArrayList<Avaliacao> listarAvaliacoes(Avaliacao avaliacao){
+        ArrayList<Avaliacao> avaliacoes = new ArrayList<>();
 
         try {
             // abrir banco de dados para leitura
@@ -132,7 +132,7 @@ public class AvaliacaoDAO {
                     avaliacao.setPontosAvaliacao(cursor.getFloat(cursor.getColumnIndexOrThrow("pontosAvaliacao")));
                     avaliacao.setTextoAvaliacao(cursor.getString(cursor.getColumnIndexOrThrow("textoAvaliacao")));
 
-                    restaurantes.add(restaurante);
+                    avaliacoes.add(avaliacao);
                 } while (cursor.moveToNext());
             }
 
@@ -142,9 +142,9 @@ public class AvaliacaoDAO {
             database.close();
 
         } catch (Exception e){
-            Log.e("RestauranteDAO", "erro ao listar todos as avaliacoes"+e.getMessage());
+            Log.e("AvaliacaoDAO", "erro ao listar todos as avaliacoes"+e.getMessage());
         }
-        return restaurantes;
+        return avaliacoes;
     }
 }
 
